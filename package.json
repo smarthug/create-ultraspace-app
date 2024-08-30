@@ -1,0 +1,24 @@
+{
+  "name": "create-ultraspace-app",
+  "version": "1.0.0",
+  "description": "A CLI tool to create a new Ultraspace project",
+  "main": "index.js",
+  "bin": {
+    "create-ultraspace-app": "./generate-app.js"
+  },
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "inquirer": "^10.1.8",
+    "rimraf": "^6.0.1"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
