@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const { select, Separator,confirm } = require('@inquirer/prompts');
+
 const { execSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
@@ -29,6 +31,72 @@ try {
 
 
 async function main() {
+    const isWeb3 = await confirm({ message: 'is it Web3?' });
+
+    const chain = await select({
+        message: 'Select a Chain',
+        choices: [
+            {
+                name: 'XRPL',
+                value: 'XRPL',
+                description: 'The XRP Ledger (XRPL) is a decentralized, public blockchain led by a global community of businesses and developers looking to solve problems and create value.',
+            },
+            {
+                name: 'EVM',
+                value: 'EVM',
+                description: 'The Ethereum Virtual Machine (EVM) is a decentralized virtual environment that executes code consistently and securely across all Ethereum nodes.',
+            },
+            new Separator(),
+            {
+                name: 'Solana',
+                value: 'Solana',
+                disabled: '(Solana is not available)',
+            },
+            {
+                name: 'Aptos',
+                value: 'Aptos',
+                disabled: '(Aptos is not available)',
+            },
+            {
+                name: 'Cosmos',
+                value: 'Cosmos',
+                disabled: '(Cosmos is not available)',
+            },
+        ],
+    });
+
+    const gameEngine = await select({
+        message: 'Select a Game Engine',
+        choices: [
+            {
+                name: 'react-three-fiber',
+                value: 'react-three-fiber',
+                description: 'React-three-fiber is a React renderer for three.js. Build your scene declaratively with re-usable, self-contained components that react to state.',
+            },
+            {
+                name: 'threejs',
+                value: 'threejs',
+                description: 'Three.js is a cross-browser JavaScript library and application programming interface used to create and display animated 3D computer graphics in a web browser using WebGL. ',
+            },
+            {
+                name: 'Unity',
+                value: 'Unity',
+                description: 'Unity is a cross-platform game engine developed by Unity Technologies',
+            },
+            {
+                name: 'Unreal',
+                value: 'Unreal',
+                description: 'Unreal Engine is a 3D computer graphics game engine developed by Epic Games',
+            },
+            {
+                name: 'Godot',
+                value: 'Godot',
+                description: 'Godot is a cross-platform, free and open-source game engine released under the permissive MIT license',
+            }
+        ],
+    });
+    console.log(chain, gameEngine);
+
     try {
         console.log('Downloading files...');
         execSync(`git clone --depth 1 ${git_repo} ${projectPath}`);
